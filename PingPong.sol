@@ -5,10 +5,10 @@ pragma AbiHeader expire;
     Call one of them with send function
 */
 contract PingPong {
-    uint counter = 0; 
-
+    uint counter = 0;
+    
     function send(address dest, uint128 value) public{              
-            dest.transfer(value);        
+            dest.transfer(value, true, 1);        
             tvm.accept();   
             counter++;        
     }

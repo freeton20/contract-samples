@@ -14,7 +14,7 @@ contract MassTransactions {
     bool deployed = false;
     
     function send(address dest, uint128 value) public{              
-            dest.transfer(value, true, 1);        
+            dest.transfer(value, false, 1);        
             tvm.accept();   
             counter++;        
     }
@@ -29,7 +29,7 @@ contract MassTransactions {
 		returns (address)
 	{
         tvm.accept();
-        uint128 value = address(this).balance - 3e8;
+        uint128 value = address(this).balance - 4e8;
       	return  new MassTransactions{		
 			code: tvm.code(),			
 			value: value,						
@@ -43,7 +43,7 @@ contract MassTransactions {
         tvm.accept();
         deployed = true;
         address child = deployer();
-        send(child, 1e8);
+        send(child, 1e7);
     }
 
     function isDeployed() public returns(bool){

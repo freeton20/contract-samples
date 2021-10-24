@@ -5,7 +5,7 @@ pragma AbiHeader expire;
 This contract for mass transaction generation in TON Blockchain
 Usage: 
 1. Deploy this contract. Add a lot of funds to this contract.
-For example, you can get in fld network 100_000 tokens
+For example, you can get in fld network 100_000 tokens. 
 2. Call function start
 */
 contract MassTransactions {    
@@ -30,7 +30,7 @@ contract MassTransactions {
 		returns (address)
 	{
         tvm.accept();
-        uint128 value = address(this).balance - 5 ton;
+        uint128 value = address(this).balance - 5 ton;// more value - more tps
       	return  new MassTransactions{		
 			code: tvm.code(),			
 			value: value,						

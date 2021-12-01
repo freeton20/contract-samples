@@ -9,13 +9,13 @@ import "https://raw.githubusercontent.com/tonlabs/DeBot-IS-consortium/main/Amoun
 import "https://raw.githubusercontent.com/tonlabs/DeBot-IS-consortium/main/UserInfo/UserInfo.sol";
 
 interface IWallet {
-    function submitTransaction(
+    function sendTransaction(
         address  dest,
         uint128 value,
         bool bounce,
-        bool allBalance,
+        uint8 flags,
         TvmCell payload)
-    external returns (uint64 transId);
+    external;
 }
 contract Name is Debot{
 
@@ -44,7 +44,7 @@ contract Name is Debot{
         optional(uint256) pubkey = 0;     
         //deposit                    
         TvmCell payload;            
-        IWallet(wallet).submitTransaction{
+        IWallet(wallet).sendTransaction{
             abiVer: 2,
             extMsg: true,
             sign: true,
@@ -53,11 +53,10 @@ contract Name is Debot{
             expire: 0,
             callbackId: tvm.functionId(onSuccess),
             onErrorId: tvm.functionId(onError)      
-        }(dest, amount, false, false, payload);        
+        }(dest, amount, true, 3, payload);        
     }
 
-    function onSuccess(uint64 transId) public{        
-        delete transId;                        
+    function onSuccess() public{                                        
         Terminal.print(0, format("Success!"));  
         start();       
     } 
@@ -72,11 +71,11 @@ contract Name is Debot{
     ) {
         name = "Sender debot";
         version = "0.0.1";
-        publisher = "publisher name";
+        publisher = "everton";
         key = "send tons to surf or safemultisig";
         author = "freeton20";
         support = address.makeAddrStd(0, 0x000000000000000000000000000000000000000000000000000000000000);
-        hello = "Hello, i am an test DeBot.";
+        hello = "Hello, i am sender debot. I can send evers to surf or safemultisig wallet";
         language = "en";
         dabi = m_debotAbi.get();
         icon = '';

@@ -1,0 +1,1 @@
+answer for the question https://stackoverflow.com/questions/70002163/how-to-get-the-value-3-on-the-first-request-without-await/70228073#70228073

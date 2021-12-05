@@ -20,4 +20,4 @@ message=$(tonos-cli -u http://net.ton.dev run 0:$debotAddress getInvokeMessage "
  | grep message | cut -d '"' -f 4 | tr '/+' '_-' | tr -d '=')
 echo "Message: $message" 
 
-echo "Deep link: https://web.ton.surf/debot?address=0:$debotAddress&message=$message&net=devnet&restart=true"
+echo "Deep link: https://uri.ton.surf/debot?address=0:$debotAddress&message=$message&net=devnet&restart=true"
